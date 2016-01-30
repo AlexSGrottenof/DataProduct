@@ -1,0 +1,82 @@
+Grading on the Bell Curve with the MTVS Application
+========================================================
+author: Alex
+date: 01/28/2016
+
+MTVS Application
+========================================================
+
+
+- Converts MTVS score into Letter Grade
+- Provides intuitive and simple interface
+- Displays your selection and its result
+- May be used for other standardized tests
+
+The Slider
+========================================================
+
+- Allows input of a test score
+- Prevents typing errors
+- Does not allow off-scale values
+
+```{r, echo=FALSE}
+library(png)
+img <- readPNG('C:/2Courses/Data Product/Project/slider.png')
+grid::grid.raster(img)
+```
+
+The Normal Curve
+========================================================
+
+- Visualize the Distribution of Historical Test Scores
+- Blue Line Shows the Location of the Select Score
+- Input and Output are Clearly Labeled
+
+
+```{r, echo=FALSE}
+stscr<- 69
+mean=70; sd=10
+lb=0; ub=100
+
+x <- seq(-4,4,length=100)*sd + mean
+hx <- dnorm(x,mean,sd)
+Grade_letter <- "C"
+#dnorm(stscr,70, 10)
+
+if(stscr>=2*sd + mean){
+  Grade_letter= "A"
+} else if(stscr>=1*sd + mean){
+  Grade_letter= "B"
+} else if(stscr>= mean){
+  Grade_letter= "C"
+} else if(stscr <  mean -2*sd ){
+  Grade_letter= "F"
+} else if(stscr < mean - sd){
+  Grade_letter= "D"
+} else if(stscr < mean){
+  Grade_letter= "C-"
+}
+
+plot(x, hx, type="n", xlab="Scores", ylab="",
+     main="Grade on the Normal Curve", axes=FALSE)
+lines(x, hx)
+axis(1, at=seq(0, 100, 10), pos=0) 
+abline(v=stscr, col="blue")
+text(stscr, 0.03814, labels = Grade_letter, col="coral1", pos= 4)
+text(stscr,(2/3)* 0.03814, labels = stscr, col="deeppink3", pos= 3)
+```
+
+
+
+Get More out of the MTVS Converter
+========================================================
+
+
+The Program can be modified to
+- Input or calculate means
+- Input or calculate standard deviations
+
+For technical details on calculations and extending
+the program contac me
+
+
